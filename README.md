@@ -4,7 +4,7 @@ Implemented from the authoritative Pasted text.txt brief using the existing repo
 
 ## Preview
 
-Run `npm run preview` with Node 22, then visit http://127.0.0.1:4173. The preview is local to this computer. No live website changes have been deployed or pushed.
+Run `npm run preview` with Node 22, then visit http://127.0.0.1:4173. This command runs a local preview. A hosted Vercel Preview is available at https://dickmui-consulting-vercel-git-website-enhance-291d8a-hkb-uy-buy.vercel.app/. Changes are pushed only to website-enhancement-preview, with draft PR https://github.com/dickcwmui/dickmui-consulting/pull/1. The production main branch is unchanged.
 
 ## Changes
 
@@ -23,7 +23,7 @@ Run `npm run preview` with Node 22, then visit http://127.0.0.1:4173. The previe
 
 The site has no runtime frontend dependencies. Generated HTML is checked in. `build.py` is a small standard-library authoring generator using the preserved original HTML in templates/original.html. Run `python3 build.py` after changing its content/templates or data/case-studies.json. data/insights.json supplies planned titles and slugs; publishing actual articles requires approved content and updating the article rendering, publication metadata and BlogPosting schema.
 
-`npm run build` copies only public assets into public/. The Vercel output directory is public; clean URLs are enabled. api/project.js is the Vercel Node function. Build scripts, original templates and tests are excluded from public output. Dashboard-level settings have not been inspected; verify they match vercel.json for a hosted preview.
+`npm run build` copies only public assets into public/. The Vercel output directory is public; clean URLs are enabled. api/project.js is the Vercel Node function. Build scripts, original templates and tests are excluded from public output. Vercel successfully built the preview from this branch. The dashboard confirms main is the production branch, and the hosted /api/project endpoint responds correctly.
 
 ## Form configuration before launch
 
@@ -48,7 +48,8 @@ Analytics integration: listen for the browser event `dmc:analytics`, or assign `
 - Form required-field validation, required challenge selection, disabled-backend failure and preserved input verified in browser.
 - Success UI verified using a separate local mocked receiver with synthetic data. No enquiry was transmitted externally.
 - Desktop five-column process and mobile vertical timeline checked. Case-study, partner and planned article views inspected.
-- No Lighthouse score is claimed; hosted performance and real delivery still need verification after Vercel preview deployment.
+- Hosted Vercel homepage, mobile menu, Partners route and form API verified. Disabled delivery returns the intended explicit not-sent response.
+- No Lighthouse score is claimed; hosted performance scoring and real delivery remain to be verified before production.
 
 Commands: `npm test`; `npm run build`; `python3 tests/check-site.py`.
 
