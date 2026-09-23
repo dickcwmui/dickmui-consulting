@@ -1,0 +1,23 @@
+[
+  {
+    "slug": "production-readiness",
+    "title": "Production Readiness",
+    "challenge": "Pilot builds exposed recurring assembly and QA issues before production release.",
+    "role": "Defined corrective-action gates, QA verification requirements and production release criteria with the Asian manufacturing team.",
+    "outcome": "Production release was tied to objective verification rather than schedule pressure."
+  },
+  {
+    "slug": "supplier-dfm-review",
+    "title": "Supplier & DFM Review",
+    "challenge": "Multiple supplier quotations used different tooling, process and MOQ assumptions, making commercial comparison difficult.",
+    "role": "Normalised RFQ assumptions, challenged DFM decisions and reviewed manufacturing risk.",
+    "outcome": "Created a clearer supplier-selection and commercial decision framework."
+  },
+  {
+    "slug": "program-recovery",
+    "title": "Program Recovery",
+    "challenge": "A hardware program was losing time through slow supplier communication, unclear ownership and unresolved technical actions.",
+    "role": "Introduced action ownership, decision gates and structured supplier follow-up.",
+    "outcome": "Reduced ambiguity and created a clearer path toward the next build milestone."
+  }
+]

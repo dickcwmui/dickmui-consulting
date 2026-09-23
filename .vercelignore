@@ -1,0 +1,5 @@
+tests/
+templates/
+build.py
+preview.cjs
+README.md
