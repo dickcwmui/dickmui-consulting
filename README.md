@@ -31,7 +31,7 @@ The preview uses FormSubmit to forward validated enquiries to Dick’s chosen Gm
 
 Set server-only Vercel environment variables:
 
-- PROJECT_DELIVERY_PROVIDER=formsubmit and PROJECT_EMAIL_TO: the verified recipient; configured in Preview only. The handler requires FormSubmit JSON success and rejects activation/error responses even when HTTP status is 200.
+- PROJECT_DELIVERY_PROVIDER=formsubmit and PROJECT_EMAIL_TO: the verified recipient; configured in Preview only. The server validates the enquiry and returns the public email-masking FormSubmit route. The browser forwards once using FormSubmit’s documented AJAX interface, and requires JSON success before displaying receipt or tracking a conversion. Activation/error responses are rejected even if HTTP is 200. FormSubmit rejects Vercel server egress with HTTP 403, so direct server forwarding is intentionally not used.
 - PROJECT_WEBHOOK_URL: alternative trusted HTTPS CRM endpoint when FormSubmit mode is not selected.
 - PROJECT_WEBHOOK_TOKEN: optional bearer token for the receiver.
 - PROJECT_FORM_ENABLED=true: enabled for Preview testing only. Production still requires confirmed privacy details and delivery.

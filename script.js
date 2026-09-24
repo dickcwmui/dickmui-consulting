@@ -15,7 +15,14 @@ if(form){
  const params=new URLSearchParams(location.search);for(const key of ['service','engagement']){form.elements[key].value=(params.get(key)||'').slice(0,80);}
  form.addEventListener('submit',async e=>{e.preventDefault();const status=document.querySelector('#form-status');status.textContent='';const data=Object.fromEntries(new FormData(form));data.challenges=new FormData(form).getAll('challenges');if(!data.challenges.length){status.textContent='Please select at least one challenge.';form.querySelector('[name=challenges]').focus();return;}
  const button=form.querySelector('[type=submit]');button.disabled=true;button.textContent='Sending…';form.setAttribute('aria-busy','true');
- try{const response=await fetch('/api/project',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data),signal:AbortSignal.timeout(15000)});const result=await response.json();if(!response.ok||result.ok!==true)throw new Error(result.error||'Your brief could not be sent. Please try again or contact Dick on WhatsApp.');track('project_form_submit');form.hidden=true;const success=document.querySelector('#form-success');success.hidden=false;success.focus();}
+ try{const response=await fetch('/api/project',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data),signal:AbortSignal.timeout(15000)});const result=await response.json();if(!response.ok)throw new Error(result.error||'Your brief could not be sent. Please try again or contact Dick on WhatsApp.');
+ if(result.delivery){
+  if(!/^https:\/\/formsubmit\.co\/ajax\/[a-f0-9]{32}$/.test(result.delivery.url))throw new Error('Invalid delivery configuration. Please contact Dick on WhatsApp.');
+  const delivery=await fetch(result.delivery.url,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(result.delivery.fields),signal:AbortSignal.timeout(15000)});
+  const receipt=await delivery.json();
+  if(!delivery.ok||(receipt.success!==true&&receipt.success!=='true'))throw new Error(/activat/i.test(String(receipt.message))?'Email delivery is awaiting verification. Your brief has not been sent. Please contact Dick on WhatsApp.':'Delivery could not be confirmed. Please contact Dick on WhatsApp before retrying.');
+ }else if(result.ok!==true)throw new Error('Delivery could not be confirmed. Please contact Dick on WhatsApp before retrying.');
+ track('project_form_submit');form.hidden=true;const success=document.querySelector('#form-success');success.hidden=false;success.focus();}
  catch(error){status.textContent=error.name==='TimeoutError'?'Delivery could not be confirmed. Please contact Dick on WhatsApp before retrying.':error.message==='Failed to fetch'?'Connection failed. Your brief has not been confirmed as received. Please try again or use WhatsApp.':error.message;}
  finally{button.disabled=false;button.textContent='Send Project Brief';form.removeAttribute('aria-busy');}
  });
