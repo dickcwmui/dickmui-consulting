@@ -27,15 +27,16 @@ The site has no runtime frontend dependencies. Generated HTML is checked in. `bu
 
 ## Form configuration before launch
 
-No receiver, public email or CRM integration existed in the source. Form delivery therefore remains disabled by default. Dick must choose and authorise the actual destination before enabling delivery.
+The preview uses FormSubmit to forward validated enquiries to Dick’s chosen Gmail inbox. The recipient is kept in server-side Vercel configuration, not frontend HTML. Dick has confirmed activation of the address. Production delivery remains disabled until the preview is approved and production settings are added.
 
 Set server-only Vercel environment variables:
 
-- PROJECT_WEBHOOK_URL: trusted HTTPS endpoint which durably accepts project enquiry JSON. Do not point it at an arbitrary URL.
+- PROJECT_DELIVERY_PROVIDER=formsubmit and PROJECT_EMAIL_TO: the verified recipient; configured in Preview only. The handler requires FormSubmit JSON success and rejects activation/error responses even when HTTP status is 200.
+- PROJECT_WEBHOOK_URL: alternative trusted HTTPS CRM endpoint when FormSubmit mode is not selected.
 - PROJECT_WEBHOOK_TOKEN: optional bearer token for the receiver.
-- PROJECT_FORM_ENABLED=true: enable only after privacy details and real delivery are verified.
+- PROJECT_FORM_ENABLED=true: enabled for Preview testing only. Production still requires confirmed privacy details and delivery.
 
-An upstream 2xx response means the receiver accepted the enquiry; the receiver must not acknowledge before storing/queuing it. Test an actual receipt end-to-end before production. Timeouts return an unconfirmed-delivery warning to avoid claiming success. The receiver should deduplicate and apply production rate controls. No enquiry payload is logged by this function.
+In generic webhook mode, an upstream 2xx response means the receiver accepted the enquiry; the receiver must not acknowledge before storing/queuing it. Test an actual receipt end-to-end before production. Timeouts return an unconfirmed-delivery warning to avoid claiming success. The receiver should deduplicate and apply production rate controls. No enquiry payload is logged by this function.
 
 Analytics integration: listen for the browser event `dmc:analytics`, or assign `window.dmcAnalytics(name, properties)`. Install the chosen adapter before script.js so page-view hooks are captured. `insight_read` only fires for an element with data-published-insight; planned articles intentionally do not emit a reading event.
 
@@ -56,7 +57,7 @@ Commands: `npm test`; `npm run build`; `python3 tests/check-site.py`.
 ## Dick's confirmation / content TODOs
 
 1. Approve the preview and supplied anonymised case wording for publication.
-2. Choose enquiry receiver/CRM and final privacy contact; confirm controller/company details, retention, processors and transfer information. The privacy page is explicitly a draft.
+2. Enquiry recipient chosen and FormSubmit activation confirmed; finalise privacy contact and confirm controller/company details, retention, processors and transfer information. The privacy page is explicitly a draft.
 3. Supply an approved real professional photograph, if desired. A code placeholder is present; no stock identity is substituted.
 4. Supply partner names/logos and permission before publishing them. No fictional partners appear.
 5. Supply/review actual Insight articles; then add genuine publication dates, calculated reading times and Article schema.
