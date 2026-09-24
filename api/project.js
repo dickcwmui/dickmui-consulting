@@ -25,8 +25,8 @@ module.exports=async function handler(req,res){
  for(const key of ['service','engagement'])payload[key]=typeof d[key]==='string'?d[key].slice(0,80):'';
  if(emailDelivery){if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(recipient))throw Error();payload.challenges=d.challenges.join(', ');payload._subject='Dick Mui Consulting — New project brief';payload._template='table';payload._replyto=d.email;payload._url='https://dickmui-consulting.vercel.app/start-a-project';}
  const upstream=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json',...(emailDelivery?{'Referer':'https://dickmui-consulting.vercel.app/start-a-project'}:{}),...(process.env.PROJECT_WEBHOOK_TOKEN?{Authorization:'Bearer '+process.env.PROJECT_WEBHOOK_TOKEN}:{})},body:JSON.stringify(payload),signal:AbortSignal.timeout(10000),redirect:'error'});
- if(!upstream.ok)throw Error();
+ if(!upstream.ok){console.warn('project_delivery_provider_http',upstream.status);throw Error();}
  if(emailDelivery){const result=await upstream.json();if(result.success!==true&&result.success!=='true'){if(/activat/i.test(String(result.message)))return res.status(503).json({error:'Email delivery is awaiting verification. Your brief has not been sent. Please contact Dick on WhatsApp below.'});throw Error();}}
  return res.status(200).json({ok:true});
- }catch{return res.status(502).json({error:'Delivery could not be confirmed. Please contact Dick on WhatsApp before retrying.'});}
+ }catch(error){console.warn('project_delivery_failed',error.name,error.cause?.code||'');return res.status(502).json({error:'Delivery could not be confirmed. Please contact Dick on WhatsApp before retrying.'});}
 };
