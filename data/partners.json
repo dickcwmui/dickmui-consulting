@@ -1,0 +1,46 @@
+[
+  {
+    "slug": "informal",
+    "name": "INFORMAL",
+    "wordmark": "INFORMAL",
+    "category": "Industrial Design",
+    "capabilityTags": ["Industrial Design", "Mechanical", "UX"],
+    "description": "Industrial design and product-development capability for products moving toward engineering and manufacture.",
+    "overview": "INFORMAL contributes industrial design and product-development perspective where design intent, usability and engineering execution need to remain aligned.",
+    "projectTypes": "Consumer, connected and physical products that need design direction, user experience thinking or mechanical development alongside a path to production.",
+    "collaboration": "Dick brings the commercialization, supplier and program lens; the partner’s work is considered where it supports the project’s product and execution requirements."
+  },
+  {
+    "slug": "truly",
+    "name": "TRULY",
+    "wordmark": "TRULY",
+    "category": "Semiconductor",
+    "capabilityTags": ["Electronics", "Sensors", "MCU", "Display"],
+    "description": "Electronics and display capability relevant to connected and consumer hardware programs.",
+    "overview": "TRULY provides a technology-capability profile for projects where electronics, sensing or display considerations are central to product decisions.",
+    "projectTypes": "Connected devices, consumer electronics and other programs needing an informed view of electronics, sensors, MCU or display requirements.",
+    "collaboration": "Dick considers technical and commercial fit with the wider program before introducing any technology capability into a recommendation."
+  },
+  {
+    "slug": "hensim",
+    "name": "HENSIM",
+    "wordmark": "HENSIM",
+    "category": "Manufacturing",
+    "capabilityTags": ["Injection Moulding", "Tooling", "Assembly", "Manufacturing"],
+    "description": "Manufacturing capability spanning moulding, tooling and assembly considerations.",
+    "overview": "HENSIM represents manufacturing capability relevant to tooling, moulding and assembly decisions during the transition into production.",
+    "projectTypes": "Physical products requiring an assessment of tooling, injection moulding, assembly approach or production readiness.",
+    "collaboration": "Dick evaluates manufacturing capability against product requirements, commercial terms, quality expectations and execution risk before making a project recommendation."
+  },
+  {
+    "slug": "hardware-meetup",
+    "name": "Hardware Meetup",
+    "wordmark": "HARDWARE / MEETUP",
+    "category": "Community",
+    "capabilityTags": ["Community", "Networking", "Events"],
+    "description": "Community and event connections for hardware founders, practitioners and industry conversations.",
+    "overview": "Hardware Meetup provides a community context for founder conversations, networking and industry events around physical product development.",
+    "projectTypes": "Founders and teams seeking informed hardware community connections alongside their own commercialization work.",
+    "collaboration": "Dick may point teams toward relevant community conversations where they complement a project’s needs; project support remains independent and tailored to the program."
+  }
+]
