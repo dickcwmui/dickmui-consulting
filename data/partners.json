@@ -39,6 +39,7 @@
     "slug": "hardware-meetup",
     "name": "Hardware Meetup",
     "wordmark": "HARDWARE / MEETUP",
+    "logo": "assets/partners/hardware-meetup.webp",
     "category": "Community",
     "capabilityTags": ["Community", "Networking", "Events"],
     "description": "Community and event connections for hardware founders, practitioners and industry conversations.",
