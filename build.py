@@ -44,6 +44,8 @@ ways=section('ways','A practical way to start',grid([card('1. Project Discussion
 independence='Partner participation does not determine project recommendations. Supplier and technology recommendations are based on project fit, capability, commercial requirements and execution risk.'
 partners=json.loads((P/'data/partners.json').read_text())
 def partner_mark(p):
+    if p.get('logo'):
+        return f'<div class="ecosystem-mark ecosystem-logo"><img src="/{esc(p["logo"])}" alt="{esc(p["name"])} logo"></div>'
     # Brand artwork has not been supplied. Use a text wordmark until approved logo assets are provided.
     return f'<div class="ecosystem-mark" aria-label="{esc(p["name"])} wordmark">{esc(p["wordmark"])}</div>'
 def partner_tags(p): return '<div class="capability-tags ecosystem-tags">'+''.join(f'<span>{esc(tag)}</span>' for tag in p['capabilityTags'])+'</div>'
